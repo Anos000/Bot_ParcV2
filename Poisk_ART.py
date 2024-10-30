@@ -18,7 +18,7 @@ def update_excel_files():
 update_excel_files()
 
 # Определяем путь к папке downloads
-downloads_dir = "downloads"
+downloads_dir = "../Parcing/downloads"
 result_file_name = "duplicate_items_across_files.xlsx"
 output_file = os.path.join(downloads_dir, result_file_name)
 

@@ -3,7 +3,7 @@ import re
 import sqlite3
 
 # Путь к файлу Excel
-excel_file = "downloads/parsed_data.xlsx"
+excel_file = "../Parcing/downloads/parsed_data.xlsx"
 
 # Чтение данных из Excel
 df = pd.read_excel(excel_file, engine='openpyxl')

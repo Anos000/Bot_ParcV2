@@ -1,4 +1,4 @@
-name: Run Script 1MySql
+name: Run ScriptMysql
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:  # Позволяет запускать вручную
 
 jobs:
-  run-script-3:
+  run-script:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +21,9 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libxi6 libgconf-2-4 xvfb  # Установка зависимостей для запуска headless Chrome
+        sudo apt-get install -y libxi6 libgconf-2-4 xvfb  # Установка зависимостей для работы с headless Chrome
         python -m pip install --upgrade pip
-        pip install selenium webdriver-manager beautifulsoup4 mysql-connector-python pytz  # Установка всех необходимых библиотек
+        pip install selenium webdriver-manager beautifulsoup4 mysql-connector-python pytz lxml  # Установка необходимых библиотек, включая lxml
 
     - name: Set up Xvfb for headless Chrome
       run: |
@@ -33,5 +33,3 @@ jobs:
 
     - name: Run Python script
       run: python test_sql_parc_mysql.py  # Запуск скрипта парсинга
-
-    # Удаляем шаг коммита и пуша, так как он не нужен

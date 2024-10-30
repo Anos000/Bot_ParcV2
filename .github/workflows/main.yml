@@ -1,0 +1,42 @@
+name: Bot Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install selenium webdriver-manager beautifulsoup4 pandas openpyxl lxml pytz telebot python-docx matplotlib fuzzywuzzy
+
+    - name: Start Timer Workflow
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { owner, repo } = context.repo; // Получаем owner и repo из контекста
+          github.rest.actions.createWorkflowDispatch({
+            owner: owner,
+            repo: repo,
+            workflow_id: 'timer_workflow.yml',  // Имя файла таймера
+            ref: 'main'
+          });
+
+    - name: Run Bot Script
+      run: |
+          python bot_test.py &  # Запуск кода бота в фоновом режиме
+          echo "Waiting for 18000 seconds..."
+          sleep 18000  # Задержка на 18000 секунд (5 часов)
+          echo "Stopping the workflow..."
+          exit 0  # Завершение работы

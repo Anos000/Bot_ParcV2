@@ -3,11 +3,7 @@ from datetime import datetime
 from fuzzywuzzy import fuzz
 from io import BytesIO
 import matplotlib.pyplot as plt
-from telebot import TeleBot, types  # Импортируем TeleBot и types
-
-# Инициализация бота с вашим токеном
-bot = TeleBot('7702548527:AAH-xkmHniF9yw09gDtN_JX7tleKJLJjr4E')
-
+from telebot import types
 
 # Функция для поиска товаров по артикулу
 def articul_in_database(query, table_names):
@@ -20,7 +16,6 @@ def articul_in_database(query, table_names):
                 return True
     return False
 
-
 # Функция для получения всех продуктов из таблиц
 def fetch_all_products(cursor, table_names):
     all_products = []
@@ -28,7 +23,6 @@ def fetch_all_products(cursor, table_names):
         cursor.execute(f"SELECT id, date_parsed, title, number, price, image, link FROM {table_name}")
         all_products.extend(cursor.fetchall())
     return all_products
-
 
 # Функция для поиска продуктов по названию
 def search_products_title(products, query):
@@ -43,7 +37,6 @@ def search_products_title(products, query):
     found_products.sort(key=lambda x: float(x[4]) if x[4].replace('.', '', 1).isdigit() else 0, reverse=True)
     return found_products
 
-
 # Функция для поиска продуктов по артикулу
 def search_products_articul(products, query):
     found_products = []
@@ -53,7 +46,6 @@ def search_products_articul(products, query):
 
     found_products.sort(key=lambda x: float(x[4]) if x[4].replace('.', '', 1).isdigit() else 999999999, reverse=True)
     return found_products
-
 
 # Основная функция для поиска продуктов
 def search_products(query, chat_id, bot):
@@ -70,17 +62,10 @@ def search_products(query, chat_id, bot):
 
     if found_products:
         message = "Найденные товары (по убыванию цены):\n"
-        i = 0
-        for product in found_products:
-            i += 1
+        for i, product in enumerate(found_products, start=1):
             price = product[4] if product[4] and product[4].replace('.', '', 1).isdigit() and int(
                 product[4]) < 999999999 else 'Необходимо уточнять'
-            if product[6].startswith('https://avtobat36.ru'):
-                site = 'Автобат36'
-            elif product[6].startswith('https://vapkagro.ru'):
-                site = 'Воронеж Комплект'
-            else:
-                site = 'Авто Альянс'
+            site = 'Автобат36' if product[6].startswith('https://avtobat36.ru') else 'Воронеж Комплект' if product[6].startswith('https://vapkagro.ru') else 'Авто Альянс'
 
             message += (
                 f"{i}. \n"
@@ -108,7 +93,6 @@ def search_products(query, chat_id, bot):
         message = f"Товары по вашему запросу '{query}' не найдены."
         bot.send_message(chat_id, message)
 
-
 # Функция для построения графика изменения цены
 def plot_price_history_by_articul(bot, chat_id, product_id):
     conn = sqlite3.connect('test_baza.db')
@@ -122,7 +106,7 @@ def plot_price_history_by_articul(bot, chat_id, product_id):
         return
 
     dates = [datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S') for row in data]
-    prices = [int(row[1]) for row in data]
+    prices = [float(row[1]) for row in data]
     plt.figure(figsize=(10, 5))
     plt.plot(dates, prices, marker='o', linestyle='-', color='b')
     plt.title(f"Изменение цены для товара {product_id}")
@@ -136,16 +120,3 @@ def plot_price_history_by_articul(bot, chat_id, product_id):
     bot.send_photo(chat_id=chat_id, photo=buffer)
     plt.close()
     buffer.close()
-
-
-# Обработчик нажатия на кнопку
-@bot.callback_query_handler(func=lambda call: True)
-def callback_query(call):
-    if call.data.startswith("grapic_"):
-        product_id = call.data.split("_")[1]
-        plot_price_history_by_articul(bot, call.message.chat.id, product_id)
-
-
-# Запуск бота
-if __name__ == "__main__":
-    bot.polling(none_stop=True)

@@ -4,12 +4,14 @@ import telebot
 from telebot import types
 from poisk_tovara import plot_price_history_by_articul, search_products
 import re
+from reges_users import register_user
 
 # Инициализация бота
 bot = telebot.TeleBot('7702548527:AAH-xkmHniF9yw09gDtN_JX7tleKJLJjr4E')  # Замените на ваш токен
 
 @bot.message_handler(commands=['start', 'restart'])
 def send_welcome(message):
+    register_user(message)  # Регистрация пользователя
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     markup.add("Динамика цены товара", "Поиск товара")
     bot.send_message(message.chat.id, "Выберите опцию из меню:", reply_markup=markup)
@@ -34,14 +36,10 @@ def search_product_by_title_handler(message):
         search_products(message.text, message.chat.id, bot)
         search_loop(message)
 
-@bot.message_handler(regexp=r'^/price_chart_.+')
-def plot_price_chart(message):
-    match = re.match(r'/price_chart_(.+)', message.text)
-    if match:
-        product_id = re.sub(r'^https?://[^/]+', '', match.group(1))
-        plot_price_history_by_articul(bot, message.chat.id, product_id)
-    else:
-        bot.send_message(message.chat.id, "Некорректная команда.")
+@bot.callback_query_handler(func=lambda call: call.data.startswith("grapic_"))
+def callback_query(call):
+    product_id = call.data.split("_")[1]
+    plot_price_history_by_articul(bot, call.message.chat.id, product_id)
 
 def run_bot():
     bot.polling(none_stop=True)

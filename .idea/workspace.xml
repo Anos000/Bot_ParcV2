@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Parcing.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fr.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parcing.py" afterDir="false" />
-    </list>
+    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +18,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="0cd5d1c5ff43c716d386e7b74b2362e0ae503c2a" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -40,16 +36,42 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Poisk_ART.executor": "Run",
+    "Python.bot.executor": "Run",
+    "Python.bot_test.executor": "Run",
+    "Python.create_docx_files.executor": "Run",
+    "Python.diagrama.executor": "Run",
     "Python.fr.executor": "Run",
+    "Python.kod_excel_baza.executor": "Run",
     "Python.parcing.executor": "Run",
+    "Python.parcingV2.executor": "Run",
+    "Python.parcingV3.executor": "Run",
+    "Python.poisk_tovara.executor": "Run",
+    "Python.reges_users.executor": "Run",
+    "Python.test_parcing.executor": "Run",
+    "Python.test_sql_parc.executor": "Run",
+    "Python.test_sql_parcV2.executor": "Run",
+    "Python.test_sql_parcV3.executor": "Run",
+    "Python.your_script.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/ParcingV2",
+    "settings.editor.selected.configurable": "configurable.group.project"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Parcing\.github\workflows" />
+      <recent name="D:\Parcing" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Parcing\.github\workflows" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-884f5ed5d46b-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.22855.92" />
+        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
       </set>
     </attachedChunks>
   </component>

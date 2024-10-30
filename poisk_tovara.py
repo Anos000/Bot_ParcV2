@@ -44,7 +44,7 @@ def search_products_articul(products, query):
         if query.strip() == product[3].strip():
             found_products.append(product)
 
-    found_products.sort(key=lambda x: float(x[4]) if x[4].replace('.', '', 1).isdigit() else 999999999, reverse=True)
+    found_products.sort(key=lambda x: float(x[4]) if x[4] and x[4].replace('.', '', 1).isdigit() else 999999999, reverse=True)
     return found_products
 
 # Основная функция для поиска продуктов
@@ -97,12 +97,13 @@ def search_products(query, chat_id, bot):
 def plot_price_history_by_articul(bot, chat_id, product_id):
     conn = sqlite3.connect('test_baza.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT date_parsed, price FROM products WHERE link LIKE ?", (f"%{product_id}",))
+    cursor.execute("SELECT date_parsed, price FROM products WHERE number = ?", (product_id,))
     data = cursor.fetchall()
     conn.close()
 
     if not data:
-        bot.send_message(chat_id, "Данные для этого товара не найдены.")
+        bot.send_message(chat_id, f"Данные для товара {product_id} не найдены.")
+        print(f"Запрос для артикула {product_id} не дал результатов.")
         return
 
     dates = [datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S') for row in data]

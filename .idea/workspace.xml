@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="" />
+    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/test_sql_parc_mysql.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poisk_tovara.py" beforeDir="false" afterPath="$PROJECT_DIR$/poisk_tovara.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reges_users.py" beforeDir="false" afterPath="$PROJECT_DIR$/reges_users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_baza.db" beforeDir="false" afterPath="$PROJECT_DIR$/test_baza.db" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,21 +56,23 @@
     "Python.parcingV3.executor": "Run",
     "Python.poisk_tovara.executor": "Run",
     "Python.reges_users.executor": "Run",
+    "Python.test_knopka.executor": "Run",
     "Python.test_parcing.executor": "Run",
     "Python.test_sql_parc.executor": "Run",
     "Python.test_sql_parcV2.executor": "Run",
     "Python.test_sql_parcV3.executor": "Run",
+    "Python.test_sql_parc_mysql.executor": "Run",
     "Python.your_script.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/ParcingV2",
+    "last_opened_file_path": "D:/Parcing",
     "settings.editor.selected.configurable": "configurable.group.project"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Parcing\.github\workflows" />
       <recent name="D:\Parcing" />
+      <recent name="D:\Parcing\.github\workflows" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Parcing\.github\workflows" />

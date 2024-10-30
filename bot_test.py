@@ -33,13 +33,13 @@ def search_product_by_title_handler(message):
     if message.text == "Назад":
         send_welcome(message)
     else:
-        search_products(message.text, message.chat.id, bot)
-        search_loop(message)
+        search_products(message.text, message.chat.id, bot)  # Здесь происходит поиск
+        search_loop(message)  # Возвращаемся к поиску после завершения
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith("grapic_"))
 def callback_query(call):
     product_id = call.data.split("_")[1]
-    plot_price_history_by_articul(bot, call.message.chat.id, product_id)
+    plot_price_history_by_articul(bot, call.message.chat.id, product_id)  # Построение графика по артикулу
 
 def run_bot():
     bot.polling(none_stop=True)

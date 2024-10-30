@@ -1,0 +1,37 @@
+name: Run Script 1MySql
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # Запускать скрипт ежедневно в 21:00 UTC
+  workflow_dispatch:  # Позволяет запускать вручную
+
+jobs:
+  run-script-3:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libxi6 libgconf-2-4 xvfb  # Установка зависимостей для запуска headless Chrome
+        python -m pip install --upgrade pip
+        pip install selenium webdriver-manager beautifulsoup4 mysql-connector-python pytz  # Установка всех необходимых библиотек
+
+    - name: Set up Xvfb for headless Chrome
+      run: |
+        Xvfb :99 -screen 0 1280x1024x16 &  # Запуск виртуального дисплея
+      env:
+        DISPLAY: :99  # Указание переменной DISPLAY для всех последующих шагов
+
+    - name: Run Python script
+      run: python test_sql_parc_mysql.py  # Запуск скрипта парсинга
+
+    # Удаляем шаг коммита и пуша, так как он не нужен

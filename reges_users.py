@@ -38,5 +38,5 @@ def add_user(user):
 
 # Регистрация нового пользователя
 def register_user(message):
-    create_tables()
-    add_user(message.from_user)
+    create_tables()  # Убедитесь, что таблицы созданы
+    add_user(message.from_user)  # Добавление пользователя в БД

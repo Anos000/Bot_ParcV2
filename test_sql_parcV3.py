@@ -86,7 +86,8 @@ cursor.execute('''
     SELECT link, price FROM productsV3
 ''')
 existing_data = cursor.fetchall()
-
+# Удаляем все записи из таблицы актуальных данных, чтобы сохранить только данные текущего дня
+cursor.execute('DELETE FROM today_productsV3')
 # Преобразуем данные в словарь для быстрой проверки (link -> price)
 existing_data_dict = {item[0]: item[1] for item in existing_data}
 
@@ -150,8 +151,7 @@ def parse_page(page_number):
 
     return parsed_data_page
 
-# Удаляем все записи из таблицы актуальных данных, чтобы сохранить только данные текущего дня
-cursor.execute('DELETE FROM today_productsV3')
+
 
 # Список для хранения данных о товарах
 parsed_data = []

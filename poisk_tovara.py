@@ -4,6 +4,10 @@ from fuzzywuzzy import fuzz
 from io import BytesIO
 import matplotlib.pyplot as plt
 from telebot import types
+import matplotlib
+import pytz
+matplotlib.use('Agg')
+
 
 # Функция для поиска товаров по артикулу
 def articul_in_database(query, table_names):
@@ -76,10 +80,21 @@ def search_products(query, chat_id, bot):
                 f"Переход на сайт: [Переход на сайт]({product[6]})\n"
             )
 
-            # Создаем кнопку для построения графика
-            markup = types.InlineKeyboardMarkup()
-            button = types.InlineKeyboardButton("Построить график", callback_data=f"grapic_{product[3]}")
-            markup.add(button)
+            markup = types.InlineKeyboardMarkup()  # Создаем объект для клавиатуры
+            if product[6].startswith('https://www.autoopt.ru'):
+                button_link = product[6].split("/", 4)[4][:55]  # Формируем уникальный ID кнопки для графика
+                button_graph = types.InlineKeyboardButton("Построить график", callback_data=f"grapic_{button_link}")
+            else:
+                button_graph = types.InlineKeyboardButton("Построить график", callback_data=f"grapic_{product[6][-55:]}")
+
+            # Добавляем кнопку для добавления товара в список
+            if product[6].startswith('https://www.autoopt.ru'):
+                button_link = product[6].split("/", 4)[4][:50]  # Формируем уникальный ID кнопки для графика
+                button_add = types.InlineKeyboardButton("Добавить в список", callback_data=f"add_product_{button_link}")
+            else:
+                button_add = types.InlineKeyboardButton("Добавить в список", callback_data=f"add_product_{product[6][-50:]}")
+
+            markup.add(button_graph, button_add)
 
             # Отправляем сообщение с кнопкой
             bot.send_message(chat_id, message, reply_markup=markup, parse_mode='Markdown')
@@ -97,17 +112,38 @@ def search_products(query, chat_id, bot):
 def plot_price_history_by_articul(bot, chat_id, product_id):
     conn = sqlite3.connect('test_baza.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT date_parsed, price FROM products WHERE number = ?", (product_id,))
-    data = cursor.fetchall()
+
+    # Список таблиц для проверки
+    table_names = ['products', 'productsV2', 'productsV3']
+    data = []
+
+    # Выполняем поиск в каждой таблице и добавляем результаты в общий список
+    for table_name in table_names:
+        cursor.execute(f"SELECT date_parsed, price FROM {table_name} WHERE link LIKE ?", (f"%{product_id}%",))
+        data.extend(cursor.fetchall())
+
     conn.close()
 
     if not data:
-        bot.send_message(chat_id, f"Данные для товара {product_id} не найдены.")
-        print(f"Запрос для артикула {product_id} не дал результатов.")
+        bot.send_message(chat_id, f"Извините, данные по товару не были найдены.")
+        print(f"Запрос для ссылки {product_id} не дал результатов.")
         return
 
     dates = [datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S') for row in data]
-    prices = [float(row[1]) for row in data]
+    tz = pytz.timezone("Europe/Moscow")
+    dates.append(datetime.now(tz))
+
+    prices = []
+    last_row = 0
+    for row in data:
+        if row[1] is not None and row[1].replace('.', '', 1).isdigit():
+            prices.append(float(row[1]))
+            last_row = float(row[1])
+        else:
+            prices.append(0)
+            last_row = 0
+    prices.append(last_row)
+
     plt.figure(figsize=(10, 5))
     plt.plot(dates, prices, marker='o', linestyle='-', color='b')
     plt.title(f"Изменение цены для товара {product_id}")

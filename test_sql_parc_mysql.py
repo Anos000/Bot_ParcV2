@@ -27,23 +27,21 @@ pages = soup.find('div', class_='bx_pagination_page').find_all('li')
 last_page = int(pages[-2].text.strip())
 
 # Подключение к базе данных MySQL
-def create_connection():
-    connection = None
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',  # Или IP-адрес вашего удаленного сервера
-            user='root',  # Замените на имя вашего пользователя
-            password='AnosVoldigod0',  # Замените на ваш пароль
-            database='test_baza_mysql'  # Название новой базы данных
-        )
-        print("Соединение с MySQL установлено")
-    except Error as e:
-        print(f"Ошибка '{e}'")
+db_config = {
+    'host': 'krutskuy.beget.tech',  # Замените на ваше имя хоста
+    'user': 'krutskuy_parc',       # Ваше имя пользователя
+    'password': 'AnosVoldigod0',    # Ваш пароль
+    'database': 'krutskuy_parc',    # Имя вашей базы данных
+}
 
-    return connection
+# Подключение к базе данных
+try:
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+    print("Подключение успешно!")
+except mysql.connector.Error as err:
+    print(f"Ошибка подключения: {err}")
 
-conn = create_connection()
-cursor = conn.cursor()
 
 # Создаем таблицу, если ее нет
 cursor.execute('''
@@ -83,8 +81,13 @@ existing_links = {item[0]: item[1] for item in existing_products}  # link -> pri
 # Переменная для хранения данных сегодняшнего дня
 today_data = []
 
-# Проходим по всем страницам
+def ensure_connection():
+    if not conn.is_connected():
+        conn.reconnect()
+
+# В основном цикле перед выполнением запросов к базе данных
 for page in range(1, last_page + 1):
+    ensure_connection()
     page_url = f"https://avtobat36.ru/catalog/avtomobili_gruzovye/?PAGEN_2={page}"
     driver.get(page_url)
     html_content = driver.page_source

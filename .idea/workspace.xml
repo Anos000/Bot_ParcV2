@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="" />
+    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/2_test_mysql.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_sql_parc_mysqlV2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Poisk_ART.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diagrama.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/poisk_tovara.py" beforeDir="false" afterPath="$PROJECT_DIR$/poisk_tovara.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reges_users.py" beforeDir="false" afterPath="$PROJECT_DIR$/reges_users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_baza.db" beforeDir="false" afterPath="$PROJECT_DIR$/test_baza.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_knopka.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_sql_parcV3.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_sql_parcV3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_sql_parc_mysql.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_sql_parc_mysql.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,9 +53,13 @@
     "Python.Poisk_ART.executor": "Run",
     "Python.bot.executor": "Run",
     "Python.bot_test.executor": "Run",
+    "Python.bot_test_my_sql.executor": "Run",
+    "Python.bot_test_my_test.executor": "Run",
     "Python.create_docx_files.executor": "Run",
     "Python.diagrama.executor": "Run",
+    "Python.edfhf.executor": "Run",
     "Python.fr.executor": "Run",
+    "Python.import_csv.executor": "Run",
     "Python.kod_excel_baza.executor": "Run",
     "Python.parcing.executor": "Run",
     "Python.parcingV2.executor": "Run",
@@ -54,17 +72,20 @@
     "Python.test_sql_parcV2.executor": "Run",
     "Python.test_sql_parcV3.executor": "Run",
     "Python.test_sql_parc_mysql.executor": "Run",
+    "Python.test_sql_parc_mysqlV2.executor": "Run",
+    "Python.test_sql_parc_mysqlV2MYYY.executor": "Run",
+    "Python.test_sql_parc_mysqlV3.executor": "Run",
     "Python.your_script.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Parcing/.github/workflows",
+    "last_opened_file_path": "D:/Parcing",
     "settings.editor.selected.configurable": "configurable.group.project"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Parcing\.github\workflows" />
       <recent name="D:\Parcing" />
+      <recent name="D:\Parcing\.github\workflows" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Parcing\.github\workflows" />

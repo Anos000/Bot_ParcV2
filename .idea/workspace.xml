@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/2_test_mysql.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_sql_parc_mysqlV2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Poisk_ART.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagrama.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/poisk_tovara.py" beforeDir="false" afterPath="$PROJECT_DIR$/poisk_tovara.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reges_users.py" beforeDir="false" afterPath="$PROJECT_DIR$/reges_users.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_baza.db" beforeDir="false" afterPath="$PROJECT_DIR$/test_baza.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_knopka.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_sql_parcV3.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_sql_parcV3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_sql_parc_mysql.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_sql_parc_mysql.py" afterDir="false" />
-    </list>
+    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

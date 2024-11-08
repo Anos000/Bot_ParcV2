@@ -21,14 +21,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install selenium webdriver-manager beautifulsoup4 pandas openpyxl lxml pytz telebot python-docx matplotlib fuzzywuzzy mysql-connector-python
 
-    - name: Set environment variables for MySQL
-      env:
-        MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-        MYSQL_USER: ${{ secrets.MYSQL_USER }}
-        MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-        MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-      run: echo "MySQL environment variables set."
-
     - name: Start Timer Workflow
       uses: actions/github-script@v6
       with:
@@ -37,16 +29,11 @@ jobs:
           github.rest.actions.createWorkflowDispatch({
             owner: owner,
             repo: repo,
-            workflow_id: 'timer_workflow.yml',  # Имя файла таймера
+            workflow_id: 'timer_workflow.yml',
             ref: 'main'
           });
 
-    - name: Run Bot Script with MySQL Connection
-      env:
-        MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-        MYSQL_USER: ${{ secrets.MYSQL_USER }}
-        MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-        MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+    - name: Run Bot Script
       run: |
         python bot_test_my_test.py &  # Запуск кода бота в фоновом режиме
         echo "Waiting for 18000 seconds..."

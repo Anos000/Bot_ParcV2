@@ -150,7 +150,7 @@ def plot_price_history_by_articul(bot, chat_id, product_id):
         print(f"Запрос для ссылки {product_id} не дал результатов.")
         return
 
-    dates = [datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S') for row in data]
+    dates = [row[0] if isinstance(row[0], datetime) else datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S') for row in data]
     tz = pytz.timezone("Europe/Moscow")
     dates.append(datetime.now(tz))
 

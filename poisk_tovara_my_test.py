@@ -95,9 +95,9 @@ def search_products(query, chat_id, bot):
             markup = types.InlineKeyboardMarkup()  # Создаем объект для клавиатуры
             if product[6].startswith('https://www.autoopt.ru'):
                 button_link = product[6].split("/", 4)[4][:55]  # Формируем уникальный ID кнопки для графика
-                button_graph = types.InlineKeyboardButton("Построить график", callback_data=f"grapic_{button_link}")
+                button_graph = types.InlineKeyboardButton("Динамика цен", callback_data=f"grapic_{button_link}")
             else:
-                button_graph = types.InlineKeyboardButton("Построить график", callback_data=f"grapic_{product[6][-55:]}")
+                button_graph = types.InlineKeyboardButton("Динамика цен", callback_data=f"grapic_{product[6][-55:]}")
 
             # Добавляем кнопку для добавления товара в список
             if product[6].startswith('https://www.autoopt.ru'):

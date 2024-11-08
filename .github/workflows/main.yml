@@ -19,24 +19,21 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install selenium webdriver-manager beautifulsoup4 pandas openpyxl lxml pytz telebot python-docx matplotlib fuzzywuzzy mysql-connector-python
+        pip install selenium webdriver-manager beautifulsoup4 pandas openpyxl lxml pytz telebot python-docx matplotlib fuzzywuzzy
 
     - name: Start Timer Workflow
-      uses: actions/github-script@v6
-      with:
-        script: |
-          const { owner, repo } = context.repo;
-          github.rest.actions.createWorkflowDispatch({
-            owner: owner,
-            repo: repo,
-            workflow_id: 'timer_workflow.yml',
-            ref: 'main'
-          });
+      env:
+        PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      run: |
+        curl -X POST -H "Accept: application/vnd.github+json" \
+             -H "Authorization: Bearer $PAT_TOKEN" \
+             https://api.github.com/repos/${{ github.repository }}/actions/workflows/timer_workflow.yml/dispatches \
+             -d '{"ref":"main"}'
 
     - name: Run Bot Script
       run: |
-        python bot_test_my_test.py &  # Запуск кода бота в фоновом режиме
-        echo "Waiting for 18000 seconds..."
-        sleep 18000  # Задержка на 18000 секунд (5 часов)
-        echo "Stopping the workflow..."
-        exit 0  # Завершение работы
+          python bot_test.py &
+          echo "Waiting for 18000 seconds..."
+          sleep 18000
+          echo "Stopping the workflow..."
+          exit 0

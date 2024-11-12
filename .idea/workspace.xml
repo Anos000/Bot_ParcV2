@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="" />
+    <list default="true" id="d6869e83-9229-4d3f-82bd-89283e83bcc1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot_test_my_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot_test_my_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poisk_tovara_my_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/poisk_tovara_my_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reges_users_my_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/reges_users_my_test.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +29,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -34,40 +40,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Poisk_ART.executor": "Run",
-    "Python.bot.executor": "Run",
-    "Python.bot_test.executor": "Run",
-    "Python.bot_test_my_sql.executor": "Run",
-    "Python.bot_test_my_test.executor": "Run",
-    "Python.create_docx_files.executor": "Run",
-    "Python.diagrama.executor": "Run",
-    "Python.edfhf.executor": "Run",
-    "Python.fr.executor": "Run",
-    "Python.import_csv.executor": "Run",
-    "Python.kod_excel_baza.executor": "Run",
-    "Python.parcing.executor": "Run",
-    "Python.parcingV2.executor": "Run",
-    "Python.parcingV3.executor": "Run",
-    "Python.poisk_tovara.executor": "Run",
-    "Python.reges_users.executor": "Run",
-    "Python.test_knopka.executor": "Run",
-    "Python.test_parcing.executor": "Run",
-    "Python.test_sql_parc.executor": "Run",
-    "Python.test_sql_parcV2.executor": "Run",
-    "Python.test_sql_parcV3.executor": "Run",
-    "Python.test_sql_parc_mysql.executor": "Run",
-    "Python.test_sql_parc_mysqlV2.executor": "Run",
-    "Python.test_sql_parc_mysqlV2MYYY.executor": "Run",
-    "Python.test_sql_parc_mysqlV3.executor": "Run",
-    "Python.your_script.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Parcing",
-    "settings.editor.selected.configurable": "configurable.group.project"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Poisk_ART.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bot_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bot_test_my_sql.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bot_test_my_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.create_docx_files.executor&quot;: &quot;Run&quot;,
+    &quot;Python.diagrama.executor&quot;: &quot;Run&quot;,
+    &quot;Python.edfhf.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fr.executor&quot;: &quot;Run&quot;,
+    &quot;Python.import_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.kod_excel_baza.executor&quot;: &quot;Run&quot;,
+    &quot;Python.parcing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.parcingV2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.parcingV3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.poisk_tovara.executor&quot;: &quot;Run&quot;,
+    &quot;Python.reges_users.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_knopka.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_parcing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_sql_parc.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_sql_parcV2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_sql_parcV3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_sql_parc_mysql.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_sql_parc_mysqlV2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_sql_parc_mysqlV2MYYY.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_sql_parc_mysqlV3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.your_script.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;e61cd3f7&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Parcing&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.project&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Parcing" />

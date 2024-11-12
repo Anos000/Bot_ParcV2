@@ -1,27 +1,27 @@
-import os
 import threading
 import telebot
 from telebot import types
+from mysql.connector import pooling
 from poisk_tovara_my_test import plot_price_history_by_articul, search_products
-import mysql.connector  # Импортируем библиотеку MySQL
-import re
 from reges_users_my_test import register_user, add_product_to_user_list
 
 # Инициализация бота
 bot = telebot.TeleBot('7702548527:AAH-xkmHniF9yw09gDtN_JX7tleKJLJjr4E')  # Замените на ваш токен
 
 # Параметры подключения к базе данных MySQL
-db_config = {
-    'host': 'krutskuy.beget.tech',  # Замените на адрес вашего MySQL-сервера
-    'user': 'krutskuy_parc',  # Замените на имя пользователя вашей БД
-    'password': 'AnosVoldigod0',  # Замените на пароль пользователя вашей БД
-    'database': 'krutskuy_parc'  # Замените на имя вашей БД
-}
+connection_pool = pooling.MySQLConnectionPool(
+    pool_name="mypool",
+    pool_size=32,  # Настройте в зависимости от нагрузки
+    host='krutskuy.beget.tech',
+    user='krutskuy_parc',
+    password='AnosVoldigod0',
+    database='krutskuy_parc'
+)
 
 
 @bot.message_handler(commands=['start', 'restart'])
 def send_welcome(message):
-    register_user(message)  # Регистрация пользователя
+    register_user(message, connection_pool)  # Регистрация пользователя
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     markup.add("Поиск товара", "Вывести список", "Очистить список")
     bot.send_message(message.chat.id, "Выберите опцию из меню:", reply_markup=markup)
@@ -51,7 +51,7 @@ def search_product_by_title_handler(message):
     if message.text == "Назад":
         send_welcome(message)
     else:
-        search_products(message.text, message.chat.id, bot)  # Здесь происходит поиск
+        search_products(message.text, message.chat.id, bot, connection_pool)  # Здесь происходит поиск
         search_loop(message)  # Возвращаемся к поиску после завершения
 
 
@@ -60,14 +60,14 @@ def callback_query(call):
     index = call.data.find("_")
     product_id = call.data[index + 1:]
     print(product_id)
-    plot_price_history_by_articul(bot, call.message.chat.id, product_id)  # Построение графика по артикулу
+    plot_price_history_by_articul(bot, call.message.chat.id, product_id, connection_pool)  # Построение графика по артикулу
 
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith("add_product_"))
 def add_product_callback(call):
     product_id = call.data.split("_", 2)[2]  # Извлекаем ID продукта
     user_id = call.message.chat.id  # Получаем ID пользователя
-    add_product_to_user_list(user_id, product_id)  # Добавляем товар в список пользователя
+    add_product_to_user_list(user_id, product_id, connection_pool)  # Добавляем товар в список пользователя
     bot.answer_callback_query(call.id, "Товар добавлен в ваш список!")  # Ответ на запрос, подтверждающий добавление
 
 
@@ -85,8 +85,8 @@ def show_user_products(message):
 
 
 def get_user_products_from_db(user_id):  # Функция для извлечения списка товаров пользователя из базы данных
-    connection = mysql.connector.connect(**db_config)
-    cursor = connection.cursor()
+    conn = connection_pool.get_connection()
+    cursor = conn.cursor()
 
     cursor.execute("SELECT product_link FROM user_products WHERE user_id = %s", (user_id,))
     links = cursor.fetchall()
@@ -103,18 +103,18 @@ def get_user_products_from_db(user_id):  # Функция для извлече�
             products.extend(cursor.fetchall())
 
     cursor.close()
-    connection.close()
+    conn.close()
     return products
 
 
 def clear_user_products(message):  # Функция для очищения списка товаров пользователя
     user_id = message.chat.id  # Получаем ID пользователя
-    connection = mysql.connector.connect(**db_config)
-    cursor = connection.cursor()
+    conn = connection_pool.get_connection()
+    cursor = conn.cursor()
     cursor.execute("DELETE FROM user_products WHERE user_id = %s", (user_id,))
-    connection.commit()
+    conn.commit()
     cursor.close()
-    connection.close()
+    conn.close()
     bot.send_message(message.chat.id, "Ваш список товаров был очищен.")
 
 

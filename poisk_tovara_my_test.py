@@ -1,4 +1,3 @@
-import mysql.connector
 from datetime import datetime
 from fuzzywuzzy import fuzz
 from io import BytesIO
@@ -10,14 +9,9 @@ matplotlib.use('Agg')
 
 
 # Функция для проверки артикула в базе данных
-def articul_in_database(query, table_names):
+def articul_in_database(query, table_names, connection_pool):
     for table_name in table_names:
-        conn = mysql.connector.connect(
-            host='krutskuy.beget.tech',  # Замените на хост MySQL сервера
-            user='krutskuy_parc',  # Замените на имя пользователя MySQL
-            password='AnosVoldigod0',  # Замените на пароль MySQL
-            database='krutskuy_parc'  # Замените на имя вашей базы данных
-        )
+        conn = connection_pool.get_connection()
         cursor = conn.cursor()
         cursor.execute(f"SELECT EXISTS(SELECT 1 FROM {table_name} WHERE number = %s)", (query,))
         result = cursor.fetchone()[0]
@@ -45,7 +39,9 @@ def search_products_title(products, query):
         if title_score >= 81:
             found_products.append(product)
 
-    found_products.sort(key=lambda x: float(x[4]) if x[4].replace('.', '', 1).isdigit() else 0, reverse=True)
+    found_products.sort(key=lambda x: float(x[4]) if x[4].replace('.', '', 1).isdigit() else 0, reverse=False)
+    del found_products[100:]
+    found_products.reverse()
     return found_products
 
 # Функция для поиска продуктов по артикулу
@@ -55,23 +51,20 @@ def search_products_articul(products, query):
         if query.strip() == product[3].strip():
             found_products.append(product)
 
-    found_products.sort(key=lambda x: float(x[4]) if x[4] and x[4].replace('.', '', 1).isdigit() else 999999999, reverse=True)
+    found_products.sort(key=lambda x: float(x[4]) if x[4] and x[4].replace('.', '', 1).isdigit() else 999999999, reverse=False)
+    del found_products[100:]
+    found_products.reverse()
     return found_products
 
 # Основная функция для поиска продуктов
-def search_products(query, chat_id, bot):
+def search_products(query, chat_id, bot, connection_pool):
     table_names = ['today_products', 'today_productsV2', 'today_productsV3']
 
-    conn = mysql.connector.connect(
-        host='krutskuy.beget.tech',  # Замените на хост MySQL сервера
-        user='krutskuy_parc',  # Замените на имя пользователя MySQL
-        password='AnosVoldigod0',  # Замените на пароль MySQL
-        database='krutskuy_parc'  # Замените на имя вашей базы данных
-    )
+    conn = connection_pool.get_connection()
     cursor = conn.cursor()
     all_products = fetch_all_products(cursor, table_names)
 
-    if articul_in_database(query, table_names):
+    if articul_in_database(query, table_names, connection_pool):
         found_products = search_products_articul(all_products, query)
     else:
         found_products = search_products_title(all_products, query)
@@ -124,13 +117,8 @@ def search_products(query, chat_id, bot):
     conn.close()
 
 # Функция для построения графика изменения цены
-def plot_price_history_by_articul(bot, chat_id, product_id):
-    conn = mysql.connector.connect(
-        host='krutskuy.beget.tech',  # Замените на хост MySQL сервера
-        user='krutskuy_parc',  # Замените на имя пользователя MySQL
-        password='AnosVoldigod0',  # Замените на пароль MySQL
-        database='krutskuy_parc'  # Замените на имя вашей базы данных
-    )
+def plot_price_history_by_articul(bot, chat_id, product_id, connection_pool):
+    conn = connection_pool.get_connection()
     cursor = conn.cursor()
 
     # Список таблиц для проверки
@@ -139,7 +127,7 @@ def plot_price_history_by_articul(bot, chat_id, product_id):
 
     # Выполняем поиск в каждой таблице и добавляем результаты в общий список
     for table_name in table_names:
-        cursor.execute(f"SELECT date_parsed, price FROM {table_name} WHERE link LIKE %s", (f"%{product_id}%",))
+        cursor.execute(f"SELECT date_parsed, price, title FROM {table_name} WHERE link LIKE %s", (f"%{product_id}%",))
         data.extend(cursor.fetchall())
 
     cursor.close()
@@ -167,7 +155,7 @@ def plot_price_history_by_articul(bot, chat_id, product_id):
 
     plt.figure(figsize=(10, 5))
     plt.plot(dates, prices, marker='o', linestyle='-', color='b')
-    plt.title(f"Изменение цены для товара {product_id}")
+    plt.title(f"Изменение цены для товара {data[0][2]}")
     plt.xlabel("Дата")
     plt.ylabel("Цена")
     plt.grid()
